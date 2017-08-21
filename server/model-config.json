@@ -14,25 +14,38 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "userDb",
+    "public": false
+  },
+  "userCredential": {
+    "dataSource": "userDb",
+    "public": false
+  },
+  "userIdentity": {
+    "dataSource": "userDb",
+    "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "userDb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "userDb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "userDb",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "userDb",
+    "public": false
+  },
+  "user": {
+    "dataSource": "userDb",
     "public": false
   }
 }
