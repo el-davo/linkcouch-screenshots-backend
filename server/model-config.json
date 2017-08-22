@@ -14,38 +14,42 @@
     ]
   },
   "User": {
-    "dataSource": "userDb",
-    "public": false
+    "dataSource": "db",
+    "public": true
   },
   "userCredential": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
   },
   "userIdentity": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
   },
   "ACL": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
   },
   "user": {
-    "dataSource": "userDb",
+    "dataSource": "db",
     "public": false
+  },
+  "token": {
+    "dataSource": "db",
+    "public": true
   }
 }
