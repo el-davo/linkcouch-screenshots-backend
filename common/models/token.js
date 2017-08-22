@@ -39,6 +39,10 @@ module.exports = Token => {
     });
   };
 
+  Token.deleteUserToken = (req, tokenId, next) => {
+    Token.app.models.AccessToken.deleteById(tokenId, next);
+  };
+
   Token.remoteMethod('token', {
       accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
       returns: {arg: 'token', type: 'object'},
@@ -50,6 +54,16 @@ module.exports = Token => {
       accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
       returns: {arg: 'tokens', type: 'object'},
       http: {path: '/', verb: 'get'}
+    }
+  );
+
+  Token.remoteMethod('deleteUserToken', {
+      accepts: [
+        {arg: 'req', type: 'object', http: {source: 'req'}},
+        {arg: 'tokenId', type: 'string', required: true}
+      ],
+      returns: {arg: 'tokens', type: 'object'},
+      http: {path: '/', verb: 'delete'}
     }
   );
 };
