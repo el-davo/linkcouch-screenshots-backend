@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '7'
+install:
+- yarn
+- yarn run lint
+cache:
+  yarn: true
+deploy:
+  provider: cloudfoundry
+  api: api.run.pivotal.io
+  username: david.ahern26@gmail.com
+  password:
+    secure: uF+8uceaAUFu1o8qj85xQ6dQy+AkmQ+O7LsJRGYvlSOAYMExxe+Gh/zqCcQfB2wWb87Zmsm4NvrQzKYcyLzfEdKzOJk9uROvCvN9SmgKIyjfXMfddEsRV2wm7F7gAT/dtTZu5TuoqHrPdakCzQEIx5sWZnMPJAB+pZ16I1oo0H5HyVERJhpSH8/trPl51drRIJSSUuza0N81JkStRT73lBzUIfJjxVKXx5/9bHH4rNy1xWgYB1q146mH6w1OQQgupOAFQfxPZJe5ogG5apmV9Zy3jh9iOcNJ7QSYuFWE+q3X+SLAsFRfH75kG74rtUlFoJnS98IzOZThkaaQIaWXJmE5jkT1ZMj1dTG/WjcxZBWOWMvYCz0ygC4zb9xecQhG2bM4eMGot74IJG1noph8sZkSos0oneEJPSFqns5PbbfZJg7Y/eMZO6ed2IbCe9mwIWaWIFRhXJE3b3C97YkMbNoa5p1lPtFY0M7Qtf1D7km0kcPisHIfmVcMCNKQw/Xo85wpacED6saiZ3ve3/ONI/QIqn0rz/BC4EiWc1T7VOqXSv/WxCFzWo0HDNHqIPndHElgftFxWxaMbA80yWA3bFTgNlIGlUZ3SdeRHDuIg9SQxK2QH1oUncpmkUeJ8SNzaaQ4WkzqirQnfPBtdPavNEEAK3akuFpF+qha87aRh04=
+  organization: thor
+  space: prod
+  on:
+    branch: master
