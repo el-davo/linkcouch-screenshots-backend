@@ -6,7 +6,7 @@ let sqlUsername = process.env.sql_username;
 let sqlPassword = process.env.sql_password;
 
 module.exports = {
-  userDb: {
+  db: {
     connector: 'mysql',
     connectionLimit: 4,
     host: sqlHostname,
