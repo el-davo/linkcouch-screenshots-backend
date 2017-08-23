@@ -21,7 +21,8 @@
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^2.0.0"
+    "strong-error-handler": "^2.0.0",
+    "webdriverio": "^4.8.0"
   },
   "devDependencies": {
     "eslint": "^3.17.1",

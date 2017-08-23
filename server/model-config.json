@@ -51,5 +51,9 @@
   "token": {
     "dataSource": "db",
     "public": true
+  },
+  "screenshot": {
+    "dataSource": "db",
+    "public": true
   }
 }
