@@ -12,28 +12,38 @@ let wdOptions = {
 module.exports = Screenshot => {
   Screenshot.screenshot = (req, res, url, next) => {
     let AccessToken = Screenshot.app.models.AccessToken;
+    let ScreenshotAnalytics = Screenshot.app.models.ScreenshotAnalytics;
 
     AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
       let UserModel = Screenshot.app.models.User;
-      UserModel.findById(accesstoken.userId, (error, user) => {
-        if (error) {
-          return next(error);
+
+      UserModel.findById(accesstoken.userId, (err, user) => {
+        if (err) {
+          return next(err);
         }
 
-        let client = webdriverio.remote(wdOptions);
+        ScreenshotAnalytics.create({
+          accessTokenId: accesstoken.id,
+          userId: user.id
+        }, err => {
+          if (err) {
+            return next(err);
+          }
 
-        client
-          .init()
-          .url(url)
-          .screenshot()
-          .then((img) => {
-            next(null, new Buffer(img.value, 'base64'), 'image/png');
-          })
-          .catch((err) => {
-            next(err);
-          })
-          .end(() => {
-          });
+          let client = webdriverio.remote(wdOptions);
+
+          client
+            .init()
+            .url(url)
+            .screenshot()
+            .then((img) => {
+              next(null, new Buffer(img.value, 'base64'), 'image/png');
+            })
+            .catch((err) => {
+              next(err);
+            })
+            .end();
+        });
       });
     });
   };
@@ -47,7 +57,7 @@ module.exports = Screenshot => {
     isStatic: true,
     returns: [
       {arg: 'body', type: 'file', root: true},
-      {arg: 'Content-Type', type: 'image/png', http: {target: 'header'}},
+      {arg: 'Content-Type', type: 'image/png', http: {target: 'header'}}
     ],
     http: {path: '/', verb: 'get'}
   });

@@ -1,10 +1,10 @@
 {
-  "name": "user",
-  "base": "User",
+  "name": "screenshotAnalytics",
+  "plural": "screenshotAnalytics",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "validateUpsert": true,
-    "allowEternalTokens": true
+    "validateUpsert": true
   },
   "properties": {
     "id": {
@@ -12,16 +12,28 @@
       "type": "string",
       "defaultFn": "uuid"
     },
-    "username": {
+    "createdAt": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "accessTokenId": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "screenshotAnalytics": {
-      "type": "hasMany",
-      "model": "screenshotAnalytics"
+    "user": {
+      "type": "belongsTo",
+      "model": "user"
+    },
+    "accessToken": {
+      "type": "belongsTo",
+      "model": "AccessToken"
     }
   },
   "acls": [
