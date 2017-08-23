@@ -202,6 +202,10 @@ bcryptjs@^2.1.0:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
 
+bignumber.js@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.0.2.tgz#2d1dc37ee5968867ecea90b6da4d16e68608d21d"
+
 bl@^1.0.0, bl@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bl/-/bl-1.2.1.tgz#cac328f7bee45730d404b692203fcb590e172d5e"
@@ -1581,6 +1585,17 @@ loopback-component-passport@^3.4.1:
     strong-globalize "^2.6.2"
     underscore "^1.8.3"
 
+loopback-connector-mysql@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/loopback-connector-mysql/-/loopback-connector-mysql-5.1.0.tgz#002e4e97f56964b2c1a86420ec65f614da8a3261"
+  dependencies:
+    async "^0.9.0"
+    debug "^2.1.1"
+    lodash "^4.17.4"
+    loopback-connector "^4.0.0"
+    mysql "^2.11.1"
+    strong-globalize "^2.5.8"
+
 loopback-connector-remote@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/loopback-connector-remote/-/loopback-connector-remote-3.1.1.tgz#c10336f527bf87c3d9b3f63c1960cb1c03213a13"
@@ -1807,6 +1822,15 @@ mux-demux@^3.7.9:
     stream-serializer "~1.1.1"
     through "~2.3.1"
     xtend "~1.0.3"
+
+mysql@^2.11.1:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/mysql/-/mysql-2.14.1.tgz#e9324015e810a50abda94855cab41edfad56284a"
+  dependencies:
+    bignumber.js "4.0.2"
+    readable-stream "2.3.3"
+    safe-buffer "5.1.1"
+    sqlstring "2.2.0"
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -2135,7 +2159,7 @@ rc@^1.1.2:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-readable-stream@^2.0.0, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.2.2, readable-stream@^2.3.3:
+readable-stream@2.3.3, readable-stream@^2.0.0, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.2.2, readable-stream@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -2400,6 +2424,10 @@ sprintf-js@^1.0.3:
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+
+sqlstring@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/sqlstring/-/sqlstring-2.2.0.tgz#c3135c4ea8abcd7e7ee741a4966a891d86a4f191"
 
 sse@0.0.6:
   version "0.0.6"
