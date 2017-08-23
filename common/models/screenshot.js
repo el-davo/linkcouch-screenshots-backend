@@ -57,7 +57,7 @@ module.exports = Screenshot => {
     isStatic: true,
     returns: [
       {arg: 'body', type: 'file', root: true},
-      {arg: 'Content-Type', type: 'image/png', http: {target: 'header'}},
+      {arg: 'Content-Type', type: 'image/png', http: {target: 'header'}}
     ],
     http: {path: '/', verb: 'get'}
   });
