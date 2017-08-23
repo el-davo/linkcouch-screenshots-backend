@@ -15,4 +15,4 @@ deploy:
   organization: thor
   space: prod
   on:
-    repo: el-davo/linkcouch-screenshots-backend
+    branch: master
