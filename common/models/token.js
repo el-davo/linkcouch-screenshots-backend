@@ -14,7 +14,7 @@ module.exports = Token => {
         AccessToken.create({
           ttl: -1,
           userId: accesstoken.userId,
-          scopes: ['screenshots'],
+          scopes: ['screenshots']
         }, (err, token) => {
           err ? next(err) : next(err, token);
         });
@@ -44,26 +44,23 @@ module.exports = Token => {
   };
 
   Token.remoteMethod('token', {
-      accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
-      returns: {arg: 'token', type: 'object'},
-      http: {path: '/', verb: 'post'}
-    }
-  );
+    accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
+    returns: {arg: 'token', type: 'object'},
+    http: {path: '/', verb: 'post'}
+  });
 
   Token.remoteMethod('getUserTokens', {
-      accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
-      returns: {arg: 'tokens', type: 'object'},
-      http: {path: '/', verb: 'get'}
-    }
-  );
+    accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
+    returns: {arg: 'tokens', type: 'object'},
+    http: {path: '/', verb: 'get'}
+  });
 
   Token.remoteMethod('deleteUserToken', {
-      accepts: [
-        {arg: 'req', type: 'object', http: {source: 'req'}},
-        {arg: 'tokenId', type: 'string', required: true}
-      ],
-      returns: {arg: 'tokens', type: 'object'},
-      http: {path: '/', verb: 'delete'}
-    }
-  );
+    accepts: [
+      {arg: 'req', type: 'object', http: {source: 'req'}},
+      {arg: 'tokenId', type: 'string', required: true}
+    ],
+    returns: {arg: 'tokens', type: 'object'},
+    http: {path: '/', verb: 'delete'}
+  });
 };
