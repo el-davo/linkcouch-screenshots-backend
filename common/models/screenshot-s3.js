@@ -36,7 +36,6 @@ module.exports = Screenshot => {
           }
 
           user.s3Credentials((err, s3Credentials) => {
-
             if (err) {
               return next(err);
             }
@@ -48,7 +47,6 @@ module.exports = Screenshot => {
               .url(url)
               .screenshot()
               .then((img) => {
-
                 let AWS = require('aws-sdk');
 
                 AWS.config.update({
