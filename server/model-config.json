@@ -53,10 +53,18 @@
     "public": true
   },
   "screenshot": {
-    "dataSource": "db",
+    "dataSource": null,
+    "public": true
+  },
+  "screenshotS3": {
+    "dataSource": null,
     "public": true
   },
   "screenshotAnalytics": {
+    "dataSource": "db",
+    "public": true
+  },
+  "s3Credentials": {
     "dataSource": "db",
     "public": true
   }
