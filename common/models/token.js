@@ -40,7 +40,6 @@ module.exports = Token => {
   };
 
   Token.deleteUserToken = (req, tokenId, next) => {
-    console.log(tokenId);
     Token.app.models.AccessToken.destroyById(tokenId, next);
   };
 
