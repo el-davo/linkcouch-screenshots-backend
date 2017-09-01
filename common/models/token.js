@@ -32,7 +32,7 @@ module.exports = Token => {
           return next(error);
         }
 
-        AccessToken.find({where: {scopes: {inq: ['screenshots']}}}, (err, tokens) => {
+        AccessToken.find({where: {userId: accesstoken.userId, scopes: {inq: ['["screenshots"]']}}}, (err, tokens) => {
           err ? next(err) : next(err, tokens);
         });
       });
@@ -40,7 +40,8 @@ module.exports = Token => {
   };
 
   Token.deleteUserToken = (req, tokenId, next) => {
-    Token.app.models.AccessToken.deleteById(tokenId, next);
+    console.log(tokenId);
+    Token.app.models.AccessToken.destroyById(tokenId, next);
   };
 
   Token.remoteMethod('token', {
