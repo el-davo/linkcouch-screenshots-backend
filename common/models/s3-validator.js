@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = S3Validator => {
-
   S3Validator.verifyS3Config = (req, s3Config, next) => {
     let AccessToken = S3Validator.app.models.AccessToken;
 
