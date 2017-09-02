@@ -5,7 +5,7 @@ module.exports = S3Validator => {
   S3Validator.verifyS3Config = (req, s3Config, next) => {
     let AccessToken = S3Validator.app.models.AccessToken;
 
-    AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
+    AccessToken.findForRequest(req, {}, () => {
       let AWS = require('aws-sdk');
 
       AWS.config.update({
@@ -16,12 +16,10 @@ module.exports = S3Validator => {
       let s3 = new AWS.S3();
 
       let s3Params = {
-        Bucket: s3Config.bucket,
-        Key: 'bla.txt',
-        Body: 'bla'
+        Bucket: s3Config.bucket
       };
 
-      s3.upload(s3Params, (err) => {
+      s3.listMultipartUploads(s3Params, (err) => {
         next(null, !err);
       });
     });
