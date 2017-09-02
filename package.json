@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint && nsp check",
+    "docker": "docker build -t linkcouch-screenshots-backend ."
   },
   "dependencies": {
     "aws-sdk": "^2.102.0",
