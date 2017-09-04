@@ -71,5 +71,9 @@
   "s3Validator": {
     "dataSource": null,
     "public": true
+  },
+  "screenshotTokens": {
+    "dataSource": "db",
+    "public": true
   }
 }

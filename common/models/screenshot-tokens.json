@@ -1,6 +1,6 @@
 {
-  "name": "user",
-  "base": "User",
+  "name": "screenshotTokens",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -11,24 +11,29 @@
       "type": "string",
       "defaultFn": "uuid"
     },
-    "username": {
+    "userId": {
       "type": "string",
       "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "required": true,
+      "defaultFn": "uuid"
     }
   },
   "validations": [],
   "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user"
+    },
     "screenshotAnalytics": {
       "type": "hasMany",
       "model": "screenshotAnalytics"
-    },
-    "s3Credentials": {
-      "type": "hasMany",
-      "model": "s3Credentials"
-    },
-    "screenshotTokens": {
-      "type": "hasMany",
-      "model": "screenshotTokens"
     }
   },
   "acls": [

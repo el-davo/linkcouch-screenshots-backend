@@ -20,7 +20,7 @@
       "type": "string",
       "required": true
     },
-    "accessTokenId": {
+    "screenshotTokensId": {
       "type": "string",
       "required": true
     }
@@ -33,7 +33,7 @@
     },
     "accessToken": {
       "type": "belongsTo",
-      "model": "AccessToken"
+      "model": "screenshotTokens"
     }
   },
   "acls": [

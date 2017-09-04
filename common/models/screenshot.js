@@ -10,20 +10,24 @@ let wdOptions = {
 };
 
 module.exports = Screenshot => {
-  Screenshot.screenshot = (req, res, url, next) => {
-    let AccessToken = Screenshot.app.models.AccessToken;
+  Screenshot.screenshot = (token, url, next) => {
     let ScreenshotAnalytics = Screenshot.app.models.ScreenshotAnalytics;
+    let screenshotToken = Screenshot.app.models.screenshotTokens;
+    let UserModel = Screenshot.app.models.User;
 
-    AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
-      let UserModel = Screenshot.app.models.User;
+    screenshotToken.findOne({include: ['user'], where: {token: token}}, (err, screenToken) => {
+      if (err || !screenToken) {
+        return next(err);
+      }
 
-      UserModel.findById(accesstoken.userId, (err, user) => {
-        if (err) {
+      UserModel.findById(screenToken.userId, (err, user) => {
+
+        if (err || !user) {
           return next(err);
         }
 
         ScreenshotAnalytics.create({
-          accessTokenId: accesstoken.id,
+          screenshotTokensId: screenToken.id,
           userId: user.id
         }, err => {
           if (err) {
@@ -50,8 +54,7 @@ module.exports = Screenshot => {
 
   Screenshot.remoteMethod('screenshot', {
     accepts: [
-      {arg: 'req', type: 'object', http: {source: 'req'}},
-      {arg: 'res', type: 'object', 'http': {source: 'res'}},
+      {arg: 'token', type: 'string', required: true},
       {arg: 'url', type: 'string', required: true}
     ],
     isStatic: true,

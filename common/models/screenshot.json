@@ -2,12 +2,17 @@
   "name": "screenshot",
   "base": "Model",
   "plural": "screenshots",
+  "ttl": -1,
+  "options": {
+    "validateUpsert": true,
+    "allowEternalTokens": true
+  },
   "acls": [
     {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",
