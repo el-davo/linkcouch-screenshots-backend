@@ -2,7 +2,7 @@
 
 let webdriverio = require('webdriverio');
 let wdOptions = {
-  host: '35.197.196.140',
+  host: '104.199.41.57',
   port: 4444,
   desiredCapabilities: {
     browserName: 'chrome'
