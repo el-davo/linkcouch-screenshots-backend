@@ -1,8 +1,9 @@
 'use strict';
 
+let config = require('../config/config');
 let webdriverio = require('webdriverio');
 let wdOptions = {
-  host: '104.199.41.57',
+  host: config.selenium.hub,
   port: 4444,
   desiredCapabilities: {
     browserName: 'chrome'
@@ -17,13 +18,13 @@ module.exports = Screenshot => {
 
     screenshotToken.findOne({include: ['user'], where: {token: token}}, (err, screenToken) => {
       if (err || !screenToken) {
-        return next(err);
+        return next('Invalid token');
       }
 
       UserModel.findById(screenToken.userId, (err, user) => {
 
         if (err || !user) {
-          return next(err);
+          return next('Invalid user');
         }
 
         ScreenshotAnalytics.create({
@@ -31,9 +32,11 @@ module.exports = Screenshot => {
           userId: user.id
         }, err => {
           if (err) {
-            return next(err);
+            return next('An error occurred');
           }
 
+
+          console.log(wdOptions);
           let client = webdriverio.remote(wdOptions);
 
           client

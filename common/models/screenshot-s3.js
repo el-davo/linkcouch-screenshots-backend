@@ -1,9 +1,10 @@
 'use strict';
 
+let config = require('../config/config');
 let webdriverio = require('webdriverio');
 let shajs = require('sha.js');
 let wdOptions = {
-  host: '104.199.41.57',
+  host: config.selenium.hub,
   port: 4444,
   desiredCapabilities: {
     browserName: 'chrome'
