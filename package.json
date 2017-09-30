@@ -1,5 +1,5 @@
 {
-  "name": "linkcouch-screenshots-backend",
+  "name": "linkcouch-screenshots-api",
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "start": "node .",
     "posttest": "npm run lint && nsp check",
-    "docker": "docker build -t linkcouch-screenshots-backend ."
+    "docker": "docker build -t eahedav/linkcouch-screenshots-api .",
+    "docker:tag": "docker tag eahedav/linkcouch-screenshots-ui eahedav/linkcouch-screenshots-api",
+    "docker:push": "docker push eahedav/linkcouch-screenshots-api"
   },
   "dependencies": {
     "aws-sdk": "^2.102.0",

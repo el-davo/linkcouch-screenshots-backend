@@ -7,6 +7,7 @@ let wdOptions = {
     browserName: 'chrome'
   }
 };
+let shajs = require('sha.js');
 
 const QUEUE_NAME_IN = 'linkcouch-screenshot-s3';
 const QUEUE_NAME_OUT = 'linkcouch-screenshot-s3-response';
@@ -24,11 +25,12 @@ module.exports = function enableAuthentication(app) {
   let push = connection.createPushQueue(QUEUE_NAME_OUT);
 
   pull.subscribe(function (messageInfo) {
-    let screenshotToken = app.models.screenshotToken;
-    let UserModel = app.models.UserModel;
+    let screenshotTokens = app.models.screenshotTokens;
+    let UserModel = app.models.User;
+    let s3Credentials = app.models.s3Credentials;
     let ScreenshotAnalytics = app.models.ScreenshotAnalytics;
 
-    screenshotToken.findOne({include: ['user'], where: {token: messageInfo.token}}, (err, screenToken) => {
+    screenshotTokens.findOne({include: ['user'], where: {token: messageInfo.token}}, (err, screenToken) => {
       if (err || !screenToken) {
         return console.info('Invalid Token');
       }
@@ -55,10 +57,12 @@ module.exports = function enableAuthentication(app) {
 
             client
               .init()
-              .url(url)
+              .url(messageInfo.url)
               .screenshot()
               .then((img) => {
                 let AWS = require('aws-sdk');
+
+                console.log(s3Creds);
 
                 AWS.config.update({
                   accessKeyId: s3Creds.key,

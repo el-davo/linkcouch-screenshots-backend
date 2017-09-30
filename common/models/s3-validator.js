@@ -11,9 +11,7 @@ module.exports = S3Validator => {
 
       let s3 = new AWS.S3({
         accessKeyId: s3Config.key,
-        secretAccessKey: s3Config.secretKey,
-        s3ForcePathStyle: true,
-        endpoint: new AWS.Endpoint(`http://${config.aws.s3_endpoint}:${config.aws.port}`)
+        secretAccessKey: s3Config.secretKey
       });
 
       let s3Params = {
