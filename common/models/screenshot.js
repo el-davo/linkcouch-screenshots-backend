@@ -1,8 +1,9 @@
 'use strict';
 
+let config = require('../config/config');
 let webdriverio = require('webdriverio');
 let wdOptions = {
-  host: '35.197.196.140',
+  host: config.selenium.hub,
   port: 4444,
   desiredCapabilities: {
     browserName: 'chrome'
@@ -10,26 +11,32 @@ let wdOptions = {
 };
 
 module.exports = Screenshot => {
-  Screenshot.screenshot = (req, res, url, next) => {
-    let AccessToken = Screenshot.app.models.AccessToken;
+  Screenshot.screenshot = (token, url, next) => {
     let ScreenshotAnalytics = Screenshot.app.models.ScreenshotAnalytics;
+    let screenshotToken = Screenshot.app.models.screenshotTokens;
+    let UserModel = Screenshot.app.models.User;
 
-    AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
-      let UserModel = Screenshot.app.models.User;
+    screenshotToken.findOne({include: ['user'], where: {token: token}}, (err, screenToken) => {
+      if (err || !screenToken) {
+        return next('Invalid token');
+      }
 
-      UserModel.findById(accesstoken.userId, (err, user) => {
-        if (err) {
-          return next(err);
+      UserModel.findById(screenToken.userId, (err, user) => {
+
+        if (err || !user) {
+          return next('Invalid user');
         }
 
         ScreenshotAnalytics.create({
-          accessTokenId: accesstoken.id,
+          screenshotTokensId: screenToken.id,
           userId: user.id
         }, err => {
           if (err) {
-            return next(err);
+            return next('An error occurred');
           }
 
+
+          console.log(wdOptions);
           let client = webdriverio.remote(wdOptions);
 
           client
@@ -50,8 +57,7 @@ module.exports = Screenshot => {
 
   Screenshot.remoteMethod('screenshot', {
     accepts: [
-      {arg: 'req', type: 'object', http: {source: 'req'}},
-      {arg: 'res', type: 'object', 'http': {source: 'res'}},
+      {arg: 'token', type: 'string', required: true},
       {arg: 'url', type: 'string', required: true}
     ],
     isStatic: true,

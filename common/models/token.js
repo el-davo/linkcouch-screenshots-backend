@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = Token => {
-  Token.token = (req, next) => {
+  Token.token = (req, name, next) => {
     let AccessToken = Token.app.models.AccessToken;
+    let screenshotToken = Token.app.models.screenshotTokens;
 
     AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
       let UserModel = Token.app.models.User;
@@ -11,10 +12,9 @@ module.exports = Token => {
           return next(error);
         }
 
-        AccessToken.create({
-          ttl: -1,
+        screenshotToken.create({
           userId: accesstoken.userId,
-          scopes: ['screenshots']
+          name: name
         }, (err, token) => {
           err ? next(err) : next(err, token);
         });
@@ -24,6 +24,7 @@ module.exports = Token => {
 
   Token.getUserTokens = (req, next) => {
     let AccessToken = Token.app.models.AccessToken;
+    let screenshotToken = Token.app.models.screenshotTokens;
 
     AccessToken.findForRequest(req, {}, (aux, accesstoken) => {
       let UserModel = Token.app.models.User;
@@ -32,7 +33,7 @@ module.exports = Token => {
           return next(error);
         }
 
-        AccessToken.find({where: {userId: accesstoken.userId, scopes: {inq: ['["screenshots"]']}}}, (err, tokens) => {
+        screenshotToken.find({where: {userId: accesstoken.userId}}, (err, tokens) => {
           err ? next(err) : next(err, tokens);
         });
       });
@@ -44,7 +45,10 @@ module.exports = Token => {
   };
 
   Token.remoteMethod('token', {
-    accepts: {arg: 'req', type: 'object', http: {source: 'req'}},
+    accepts: [
+      {arg: 'req', type: 'object', http: {source: 'req'}},
+      {arg: 'name', type: 'string', required: true}
+    ],
     returns: {arg: 'token', type: 'object'},
     http: {path: '/', verb: 'post'}
   });

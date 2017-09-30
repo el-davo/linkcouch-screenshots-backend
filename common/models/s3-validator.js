@@ -1,5 +1,7 @@
 'use strict';
 
+let config = require('../config/config');
+
 module.exports = S3Validator => {
   S3Validator.verifyS3Config = (req, s3Config, next) => {
     let AccessToken = S3Validator.app.models.AccessToken;
@@ -7,12 +9,10 @@ module.exports = S3Validator => {
     AccessToken.findForRequest(req, {}, () => {
       let AWS = require('aws-sdk');
 
-      AWS.config.update({
+      let s3 = new AWS.S3({
         accessKeyId: s3Config.key,
         secretAccessKey: s3Config.secretKey
       });
-
-      let s3 = new AWS.S3();
 
       let s3Params = {
         Bucket: s3Config.bucket
